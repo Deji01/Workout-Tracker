@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { useState } from 'react'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 export default function Login() {
     const [email, setEmail] = useState('')
@@ -12,18 +13,16 @@ export default function Login() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
+        const result = await signIn('credentials', {
+            redirect: false,
+            email,
+            password,
         })
 
-        if (response.ok) {
-            router.push('/')
+        if (result?.error) {
+            alert(result.error)
         } else {
-            alert('Login failed')
+            router.push('/')
         }
     }
 
