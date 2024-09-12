@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Select } from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function NewExercise() {
   const [name, setName] = useState('')
@@ -54,12 +54,17 @@ export default function NewExercise() {
             onValueChange={setMuscleGroup}
             required
           >
-            <Select.Option value="chest">Chest</Select.Option>
-            <Select.Option value="back">Back</Select.Option>
-            <Select.Option value="legs">Legs</Select.Option>
-            <Select.Option value="shoulders">Shoulders</Select.Option>
-            <Select.Option value="arms">Arms</Select.Option>
-            <Select.Option value="core">Core</Select.Option>
+            <SelectTrigger>
+              <SelectValue placeholder="Muscle Group" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="chest">Chest</SelectItem>
+              <SelectItem value="back">Back</SelectItem>
+              <SelectItem value="legs">Legs</SelectItem>
+              <SelectItem value="shoulders">Shoulders</SelectItem>
+              <SelectItem value="arms">Arms</SelectItem>
+              <SelectItem value="core">Core</SelectItem>
+            </SelectContent>
           </Select>
         </div>
         <div>
